@@ -1,20 +1,23 @@
-import { useState } from "react";
 import CardList from "./CardList";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchQuery, setVisible } from "../actions/action";
 
 function Search() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  const isVisible = useSelector((state) => state.isVisible);
+  const dispatch = useDispatch();
+  const searchText = useSelector((state) => state.searchQuery);
+
   const handleClick = (event) => {
     event.preventDefault();
     if (searchText.length > 0) {
-      setIsVisible(true);
+      dispatch(setVisible(true));
     } else {
       console.log(searchText);
     }
   };
 
   const handleOnChange = (event) => {
-    setSearchText(event.target.value);
+    dispatch(setSearchQuery(event.target.value));
   };
 
   return (

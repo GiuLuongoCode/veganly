@@ -1,55 +1,38 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
 import axios from "axios";
-
-const initalState = {
-  data: [],
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "SUCCESS":
-      return {
-        data: action.payload,
-      };
-
-    case "ERROR":
-      console.log("ERRROROROR")
-      return {
-        data: [],
-      };
-
-    default:
-      return state;
-  }
-};
+import { setRecipes } from "../actions/action";
 
 function CardList({ query }) {
-  const [recipesRedux, dispatch] = useReducer(reducer, initalState);
+  const recipes = useSelector((state) => state.recipes);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    axios
-      .get(import.meta.env.VITE_API_URL, {
-        headers: {
-          "x-api-key": import.meta.env.VITE_API_KEY,
-        },
-        params: {
-          query: query,
-          diet: "vegan",
-        },
-      })
-      .then((res) => {
-        dispatch({ type: "SUCCESS", payload: res.data.results });
-      })
-      .catch((err) => {
-        console.log(apiUrl)
-        console.log(err)
-        dispatch({ type: "ERROR" });
-      });
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(import.meta.env.VITE_API_URL, {
+          headers: {
+            "x-api-key": import.meta.env.VITE_API_KEY,
+          },
+          params: {
+            query: query,
+            diet: "vegan",
+          },
+        });
+        dispatch(setRecipes(response.data.results));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [dispatch, query]);
+
   return (
     <div className="grid gap-4 grid-cols-3 mt-8">
-      {recipesRedux.data.map((recipe) => (
-        <Card key={recipe.id} image={recipe.image} title={recipe.title}></Card>
+      {recipes.map((recipe) => (
+        <Card key={recipe.id} image={recipe.image} title={recipe.title} />
       ))}
     </div>
   );
