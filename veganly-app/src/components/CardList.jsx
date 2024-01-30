@@ -14,6 +14,7 @@ const reducer = (state, action) => {
       };
 
     case "ERROR":
+      console.log("ERRROROROR")
       return {
         data: [],
       };
@@ -27,9 +28,9 @@ function CardList({ query }) {
   const [recipesRedux, dispatch] = useReducer(reducer, initalState);
   useEffect(() => {
     axios
-      .get("https://api.spoonacular.com/recipes/complexSearch", {
+      .get(import.meta.env.VITE_API_URL, {
         headers: {
-          "x-api-key": "23ce25ffee0b442d8784358d06586e39",
+          "x-api-key": import.meta.env.VITE_API_KEY,
         },
         params: {
           query: query,
@@ -40,6 +41,8 @@ function CardList({ query }) {
         dispatch({ type: "SUCCESS", payload: res.data.results });
       })
       .catch((err) => {
+        console.log(apiUrl)
+        console.log(err)
         dispatch({ type: "ERROR" });
       });
   }, []);
