@@ -32,7 +32,7 @@ function CardList({ query }) {
   return (
     <div className="grid gap-4 grid-cols-3 mt-8">
       {recipes.map((recipe) => (
-        <Card key={recipe.id} image={recipe.image} title={recipe.title} />
+        <Card key={recipe.id} image={recipe.image} title={recipe.title} id={recipe.id} />
       ))}
     </div>
   );
