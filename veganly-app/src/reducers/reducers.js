@@ -2,6 +2,7 @@
 const initialState = {
   recipes: [],
   searchQuery: "",
+  recipeDetails: {},
   isVisible: false,
 };
 
@@ -22,6 +23,11 @@ const appReducer = (state = initialState, action) => {
         ...state,
         isVisible: action.payload,
       };
+    case "SET_RECIPE_DETAILS":
+      return {
+        ...state,
+        recipeDetails: action.payload,
+      }
     default:
       return state;
   }
