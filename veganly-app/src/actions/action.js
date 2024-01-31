@@ -12,3 +12,8 @@ export const setVisible = (isVisible) => ({
   type: "SET_VISIBLE",
   payload: isVisible,
 });
+
+export const setRecipeDetails = (recipe) => ({
+  type: "SET_RECIPE_DETAILS",
+  payload: recipe,
+})

@@ -1,12 +1,19 @@
 import "./App.css";
 import Search from "./components/Search";
+import RecipePage from "./pages/RecipePage";
+import HomePage from "./pages/HomePage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl text-blue-500 mb-4">Veganly</h1>
-      <Search></Search>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />}>
+        </Route>
+        <Route path="/recipe/:id" element={<RecipePage />}>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
