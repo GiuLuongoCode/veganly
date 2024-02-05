@@ -42,7 +42,7 @@
     <a href="https://github.com/GiuLuongoCode/veganly"><strong>Explore the project »</strong></a>
     <br />
     <br />
-    <a href="https://giuluongocode.github.io/veganly/">View Demo</a>
+    <a href="https://veganly.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/GiuLuongoCode/veganly/issues">Report Bug</a>
     ·
