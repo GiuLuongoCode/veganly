@@ -1,19 +1,8 @@
-export const setSearchQuery = (query) => ({
-  type: "SET_SEARCH_QUERY",
-  payload: query,
-});
+import { createAction } from "@reduxjs/toolkit";
 
-export const setRecipes = (recipes) => ({
-  type: "SET_RECIPES",
-  payload: recipes,
-});
-
-export const setVisible = (isVisible) => ({
-  type: "SET_VISIBLE",
-  payload: isVisible,
-});
-
-export const setRecipeDetails = (recipe) => ({
-  type: "SET_RECIPE_DETAILS",
-  payload: recipe,
-})
+export const setSearchQuery = createAction("SET_SEARCH_QUERY");
+export const setRecipes = createAction("SET_RECIPES");
+export const setVisible = createAction("SET_VISIBLE");
+export const setRecipeDetails = createAction("SET_RECIPE_DETAILS");
+export const setIsLoading = createAction("SET_LOADING");
+export const setClickable = createAction("SET_CLICKABLE");

@@ -1,36 +1,50 @@
-// reducers.js
+import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
   recipes: [],
   searchQuery: "",
   recipeDetails: {},
   isVisible: false,
+  isLoading: true,
+  isClickable: true,
 };
 
-const appReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "SET_SEARCH_QUERY":
-      return {
-        ...state,
-        searchQuery: action.payload,
-      };
-    case "SET_RECIPES":
-      return {
-        ...state,
-        recipes: action.payload,
-      };
-    case "SET_VISIBLE":
-      return {
-        ...state,
-        isVisible: action.payload,
-      };
-    case "SET_RECIPE_DETAILS":
-      return {
-        ...state,
-        recipeDetails: action.payload,
+const appSlice = createSlice({
+  name: "app",
+  initialState,
+  reducers: {
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
+    },
+    setRecipes: (state, action) => {
+      state.recipes = action.payload;
+    },
+    setVisible: (state, action) => {
+      state.isVisible = action.payload;
+    },
+    setRecipeDetails: (state, action) => {
+      state.recipeDetails = action.payload;
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
+    setClickable: (state, action) => {
+      if (action.payload) {
+        state.isClickable = true;
+      } else {
+        state.isClickable = false;
       }
-    default:
-      return state;
-  }
-};
+    },
+  },
+});
 
-export default appReducer;
+export const {
+  setSearchQuery,
+  setRecipes,
+  setVisible,
+  setRecipeDetails,
+  setIsLoading,
+  setClickable,
+} = appSlice.actions;
+
+export default appSlice.reducer;
