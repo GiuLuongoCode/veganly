@@ -36,18 +36,20 @@ function CardList({ query }) {
   }, [dispatch, query]);
 
   return (
-    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
+    <>
       {isLoading && <Loader />}
-      {!isLoading &&
-        recipes.map((recipe) => (
-          <Card
-            key={recipe.id}
-            image={recipe.image}
-            title={recipe.title}
-            id={recipe.id}
-          />
-        ))}
-    </div>
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
+        {!isLoading &&
+          recipes.map((recipe) => (
+            <Card
+              key={recipe.id}
+              image={recipe.image}
+              title={recipe.title}
+              id={recipe.id}
+            />
+          ))}
+      </div>
+    </>
   );
 }
 
