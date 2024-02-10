@@ -1,16 +1,23 @@
-import CardList from "./CardList";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchQuery, setVisible } from "../actions/action";
+import {
+  setSearchQuery,
+  setVisible,
+  setRecipes,
+  setClickable,
+} from "../reducers/reducers";
+import CardList from "./CardList";
 
 function Search() {
-  const isVisible = useSelector((state) => state.isVisible);
+  const isVisible = useSelector((state) => state.app.isVisible);
+  const isClickable = useSelector((state) => state.app.isClickable);
   const dispatch = useDispatch();
-  const searchText = useSelector((state) => state.searchQuery);
+  const searchText = useSelector((state) => state.app.searchQuery);
 
   const handleClick = (event) => {
     event.preventDefault();
     if (searchText.length > 0) {
       dispatch(setVisible(true));
+      dispatch(setClickable(false));
     } else {
       console.log(searchText);
     }
@@ -18,6 +25,8 @@ function Search() {
 
   const handleOnChange = (event) => {
     dispatch(setSearchQuery(event.target.value));
+    dispatch(setRecipes([]));
+    dispatch(setVisible(false));
   };
 
   return (
@@ -54,6 +63,7 @@ function Search() {
             placeholder="Search Mockups, Logos..."
             required
             onChange={handleOnChange}
+            disabled={!isClickable}
           />
         </div>
       </form>
@@ -61,6 +71,7 @@ function Search() {
         type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-2"
         onClick={handleClick}
+        disabled={!isClickable}
       >
         Search
       </button>
